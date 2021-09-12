@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="product">
+	<input type="hidden" value="{{product.id}}" class="product-id" />
+	<div class="product-name">
+		{{product.name}}
+	</div>
+	<div class="product-img">
+		<img id="product-img" src="/img/{{product.img}}" , alt="{{product.name}}" />
+	</div>
+	<div class="product-content">
+		{{product.content}}
+	</div>
+	<div class="product-price">
+		{{product.price}}원
+	</div>
+	<div class="product-remain">
+		{{product.remaincount}}개 남음
+	</div>
+	<div>
+		<form id="product-form" action="/basket" method="post">
+			<input type="hidden" name="name" , value="{{product.name}}" />
+			<input type="number" name="count" placeholder="구매 수량" min="1" value="1" />
+			<button id="go-basket-btn" type="submit" class="btn">장바구니 담기</button>
+		</form>
+		<a href="" class="direct-buy btn">바로 구매</a>
+	</div>
+</div>
+<hr />
+<div class="comment">
+	<div class="comment-info">
+		{{comment.user}}
+		<span class="star-rating">
+			<span style="width:{{comment.rating}}%"></span>
+		</span>
+		<br />
+		<span class="comment-content">{{comment.content}}</span>
+	</div>
+</div>
+{% endblock %}

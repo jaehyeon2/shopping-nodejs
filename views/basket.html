@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% for product in products %}
+<div class="basket" location.href="/product/{{product.id}}">
+	<input type="hidden" value="{{product.id}}" class="buy-id" />
+	<div class="product-name">
+		{{product.name}}
+	</div>
+	<div class="basket product-img">
+		<img src="/img/{{product.img}}" alt="썸네일" />
+	</div>
+	<div class="basket product-info">
+		{{product.price}}원
+		<input
+			type="number"
+			name="buycount"
+			placeholder="구매 수량"
+			min="1"
+			value="{{product.ordercount}}"
+		/>
+	</div>
+	<div>
+		<a href="/product/{{product.id}}" class="enter btn">입장</a>
+	</div>
+</div>
+{% endfor %}
+<a href="/" id="exit-btn" class="btn">목록으로</a>
+{% endblock %}

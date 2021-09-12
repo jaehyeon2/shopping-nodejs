@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="timeline">
+	<div class="product-form">
+		<form id="hashtag-form" action="/hashtag">
+			<input type="text" name="hashtag" placeholder="search" />
+			<button class="btn">
+				검색
+			</button>
+		</form>
+		{% for product in products %}
+		<div class="product" location.href="/product/{{product.id}}">
+			<input type="hidden" value="{{product.id}}" class="product-id" />
+			<div class="product-name">
+				{{product.name}}
+			</div>
+			<div class="product-img">
+				<img src="img/{{product.img}}" alt="썸네일" />
+			</div>
+			<div class="product-info">
+				{{product.price}}원 / {{product.remaincount}}개 남음
+			</div>
+			<div>
+				<a href="/product/{{product.id}}" class="enter btn">입장</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
