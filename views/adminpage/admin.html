@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="products">
+	<form id="hashtag-form" action="/admin/hashtag">
+		<input type="text" name="hashtag" placeholder="search">
+		<button class="btn">검색</button>
+	</form>
+	<table id="product-list">
+		<thead>
+			<tr>
+				<th>상품명</th>
+				<th>가격</th>
+				<th>남은 갯수</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+			<tr>
+				<td>{{product.name}}</td>
+				<td>{{product.price}}</td>
+				<td>{{product.remaincount}}개</td>
+				<td><a href="/admin/product/{{product.id}}" class="enter btn">입장</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="/admin/product" class="btn">상품 등록</a>
+	<!--상품 조회 페이지 추가 예정-->
+</div>
+
+{% endblock %}

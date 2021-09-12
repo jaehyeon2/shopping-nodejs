@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div>
+	<form id="product-edit" action="/admin/update/{{product.id}}" method="post" enctype="multipart/form-data">
+		<div class="product-name">
+			<label id="product-name" for="name"></label>
+			<input id="name" name="name" type="text" placeholder="이름" value="{{product.name}}"/>
+		</div>
+		<div class="input-group">
+			<textarea id="content" name="content" cols="30" maxlength="500" placeholder="내용">{{product.content}}</textarea>
+		</div>
+		<div class="product-tag">
+			<textarea id="hashtag" name="hashtag" cols="30" maxlength="500" placeholder="해시태그">{{product.hashtag}}</textarea>
+		</div>
+		<div class="img-preview">
+			<img id="img-preview" src="/img/{{product.img}}" width="250" alt="미리보기" />
+			<input id="img-url" type="hidden" name="url"/>
+		</div>
+		<div>
+			<label id="img-label" for="img">사진 업로드</label>
+			<input id="img" type="file" accept="image/*" name="img"/>
+			<button id="submit-btn" type="submit" class="btn">수정</button>
+		</div>
+	</form>
+	<a href="/admin" id="exit-btn" class="btn">목록으로</a>
+</div>
+{% endblock %}

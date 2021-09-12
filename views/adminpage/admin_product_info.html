@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="product">
+	<h2>{{product.name}}</h2>
+	<div>가격:{{product.price}}</div>
+	<img id="product-img" src="/img/{{product.img}}">
+	<div>상품 설명<br>{{product.content}}</div>
+	<div>태그<br>{{product.hashtag}}</div>
+</div>
+<a href="/admin/update/{{product.id}}" class="btn">수정</a>
+<hr>
+<form id="product-add" action="/admin/add/{{product.id}}" method="post">
+	<label id="add-count" for="addcount">추가 수량</label>
+	<input id="addcount" type="number" min="1" value="1"><button id="submit-btn" type="submit" class="btn">수량 추가</button>
+</form>
+<form id="product-form" action="/admin/delete/{{product.id}}" method="post">
+	<a href="/admin" id="exit-btn" class="btn">목록으로</a><button id="del-btn" type="submit" class="btn">삭제</button>
+</form>
+{% endblock %}

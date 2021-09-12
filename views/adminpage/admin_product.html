@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div>
+	  <form id="product-form" action="/admin/product" method="post" enctype="multipart/form-data">
+		  <div class="product-name">
+			  <label id="product-name" for="name">상품명</label>
+			  <input id="name" name="name" type="text" placeholder="이름"/>
+		  </div>
+		  <div class="product-price">
+			  <label id="product-price" for="price">가격</label>
+			  <input id="price" name="price" type="number" value="10000" min="10" placeholder="가격"/>
+		  </div>
+		  <div class="product-count">
+			  <label id="product-count" for="count">수량</label>
+			  <input id="count" name="count" type="number" value="10" min="1" placeholder="수량"/>
+		  </div>
+		  <div class="input-group">
+			  <textarea id="content" name="content" cols="30" maxlength="500" placeholder="내용"></textarea>
+		  </div>
+		  <div class="product-tag">
+			  <textarea id="hashtag" name="hashtag" cols="30" maxlength="500" placeholder="해시태그"></textarea>
+		  </div>
+		  <div class="img-preview">
+			  <img id="img-preview" src="" style="display: none;" width="250" alt="미리보기" />
+			  <input id="img-url" type="hidden" name="url" />
+		  </div>
+		  <div>
+			  <label id="img-label" for="img">사진 업로드</label>
+			  <input id="img" type="file" accept="image/*" name="img"/>
+			  <button id="submit-btn" type="submit" class="btn">상품 등록</button>
+		  </div>
+	  </form>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+	if (document.getElementById('img')) {
+		document.getElementById('img').addEventListener('change', function (e) {
+			const formData = new FormData();
+			console.log(this, this.files);
+			formData.append('img', this.files[0]);
+			axios
+				.post('/admin/product/img', formData)
+				.then((res) => {
+				document.getElementById('img-url').value = res.data.url;
+				document.getElementById('img-preview').src = res.data.url;
+				document.getElementById('img-preview').style.display = 'inline';
+			})
+				.catch((err) => {
+				console.error(err);
+			});
+		});
+	}
+</script>
+{% endblock %}
