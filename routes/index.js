@@ -35,7 +35,7 @@ router.get('/join', isNotLoggedIn, (req, res)=>{
 	res.render('join', {title:'join - NodeShoppingMall'});
 });
 
-router.get('/product/:id', isLoggedIn, async(req, res, next)=>{
+router.get('/product/:id', async(req, res, next)=>{
 	try{
 		const product=await Product.findOne({where:req.params.id});
 		res.render('product', {title:`${product.name} - NodeShoppingMall`, product});
